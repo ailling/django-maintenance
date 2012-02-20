@@ -18,6 +18,8 @@ class MaintenanceMiddleware(object):
         
         if getattr(settings, 'MAINTENANCE_CACHE_MESSAGES', False):
             messages = cache.get('maintenance_messages')
+        else:
+            messages = None
         
         if not messages:
             messages = MaintenanceMessage.objects.filter(start_time__lt=datetime.now())\
